@@ -1,0 +1,9 @@
+Сlothing store with game themes
+
+Site is written in:
+HTML 5
+CSS 3
+JavaScript
+Bootstrap 5
+
+by Argen Teshebaev
