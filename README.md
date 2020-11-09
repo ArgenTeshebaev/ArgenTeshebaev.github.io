@@ -10,10 +10,11 @@
 <br>Bootstrap 5
 
 <br>Site has:
+<br>6 tabs
+<br>2 modals
 <br>Google maps
 <br>Youtube video
 <br>Teacher photos
-<br>2 modals
 
 <br>by Argen Teshebaev
 
