@@ -9,7 +9,7 @@
 <br>JavaScript
 <br>Bootstrap 5
 
-<br>site has:
+<br>Site has:
 <br>Google maps
 <br>Youtube video
 <br>Teacher photos
