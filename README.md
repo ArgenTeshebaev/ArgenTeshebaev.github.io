@@ -1,19 +1,21 @@
 # ArgenTeshebaev.github.io
-website Gamer Shop
+<br>website Gamer Shop
 
-Сlothing store with game themes
+<br>Сlothing store with game themes
 
-Site is written in:
-HTML 5
-CSS 3
-JavaScript
-Bootstrap 5
+<br>Site is written in:
+<br>HTML 5
+<br>CSS 3
+<br>JavaScript
+<br>Bootstrap 5
 
-site has:
-Google maps
-Youtube video
-Teacher photos
-2 modals
+<br>site has:
+<br>Google maps
+<br>Youtube video
+<br>Teacher photos
+<br>2 modals
+
+<br>by Argen Teshebaev
 
 ![alt text](https://i.imgur.com/XUKtnbV.png)
 ![alt text](https://i.imgur.com/yvLccAd.png)
