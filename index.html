@@ -1,151 +1,100 @@
 <!DOCTYPE html>
-<html lang="ru" dir="ltr">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        * {margin:0;padding:0;}
+        .container {width: 100%; height: 100vh;}
+    </style>
+    <div class="container"></div>
+    <script src="three.js"></script>
+    <script src="GLTFLoader.js"></script>
+    <script type="module">
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="" content="">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
-    <title>SHOP</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
+        import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js'
 
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000;">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">GAMER SHOP</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav mr-auto mb-3 mb-lg-0">
+        let scene;
+        let camera;
+        let renderer;
 
-            <li class="nav-item">
-              <a class="nav-link" href="html/Futbolki.html">ФУТБОЛКИ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="html/Svitshoti.html">СВИТШОТЫ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="html/Hudi.html">ХУДИ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="html/Raznoe.html">РАЗНОЕ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="html/Kontakti.html">КОНТАКТЫ</a>
-            </li>
+        function init() {
+            let container = document.querySelector('.container');
 
-          </ul>
+            //Scene
+            scene = new THREE.Scene()
+            scene.background = new THREE.Color(0xffffff);
 
-          <button class="d-flex btn btn-outline-dark" data-toggle="modal" data-target="#accaunt" type="button" name="button">
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-            </svg>
-          </button>
+            //Camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 3000);
+            camera.position.z = 100;
+            camera.position.y = 100;
+            camera.position.x = 100;
 
-          <button class="d-flex btn btn-outline-dark" data-toggle="modal" data-target="#buy" type="button" name="button">
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-basket3-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172z"/>
-              <path d="M2.468 15.426L.943 9h14.114l-1.525 6.426a.75.75 0 0 1-.729.574H3.197a.75.75 0 0 1-.73-.574z"/>
-            </svg>
-          </button>
+            //render
+            renderer = new THREE.WebGLRenderer({antialias: true})
+            renderer.setSize(window.innerWidth, window.innerHeight)
+            container.appendChild(renderer.domElement)
 
-        </div>
-      </div>
-    </nav>
+            //OrbitControls
+            const controls = new OrbitControls(camera, renderer.domElement);
+            controls.update();
+            controls.enableDamping = true;
+            controls.minDistance = 100;
 
-    <!-- Modal -->
-    <div class="modal fade" id="accaunt" tabindex="-1" aria-labelledby="accauntLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
+            //light
+            const ambient = new THREE.AmbientLight(0xffffff, 1);
+            scene.add(ambient)
 
-          <div class="modal-header">
-            <h5 class="modal-title" id="accauntLabel">Вход в личный кабинет</h5>
-            <button class="btn-close" data-dismiss="modal" aria-label="close"></button>
-          </div>
+            let light = new THREE.PointLight(0xc4c4c4, 1);
+            light.position.set(0, 300, 500);
+            scene.add(light)
 
-          <div class="modal-body">
-            <form class="" action="" method="post">
+            let light2 = new THREE.PointLight(0xc4c4c4, 1);
+            light2.position.set(500, 300, 500);
+            scene.add(light2)
 
-              <div class="row mb-3">
-                <label for="inputEmail" class="col-sm-3 col-form-label">Эл.почта</label>
-                <div class="col-sm-10">
-                  <input type="email" class="form-control" id="inputEmail">
-                </div>
-              </div>
+            let light3 = new THREE.PointLight(0xc4c4c4, 1);
+            light3.position.set(0, 300, -500);
+            scene.add(light3)
 
-              <div class="row mb-3">
-                <label for="inputPass" class="col-sm-3 col-form-label">Пароль</label>
-                <div class="col-sm-10">
-                  <input type="password" class="form-control" id="inputPass">
-                </div>
-              </div>
+            let light4 = new THREE.PointLight(0xc4c4c4, 1);
+            light4.position.set(-500, 300, 500);
+            scene.add(light4)
 
-              <fieldset>
-                <div class="row mb-3">
-                  <div class="col-sm-10">
-                    <div class="form-check">
-                      <input type="checkbox" id="gridCheck" class="form-check-input">
-                      <label for="gridCheck" class="form-check-label mr-5">Сохранить пароль</label>
-                      <a href="https://risovach.ru/upload/2013/09/mem/ha-ha-ha_29429405_orig_.jpg">Забыли пароль</a>
-                    </div>
-                  </div>
-                </div>
-              </fieldset>
+            //model
+            const loader = new THREE.GLTFLoader();
+            loader.load('./webmodels.gltf', gltf => {
+                scene.add(gltf.scene);
+                scene.scale.set(15,15,15);
+            },
+                function (error) {
+                    console.log('Error: ' + error)
+                }
+            )
 
-            </form>
-          </div>
+            //Resize
+            window.addEventListener('resize', onWindowResize, false)
 
-          <div class="modal-footer">
-            <button class="btn btn-secondary" data-dismiss="modal">Войти</button>
-          </div>
+            function onWindowResize() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
 
-        </div>
-      </div>
-    </div>
+                renderer.setSize(window.innerWidth, window.innerHeight)
+            }
 
-    <!-- Modal -->
-
-    <div class="modal fade" id="buy" tabindex="-1" aria-labelledby="accauntLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <h5 class="modal-title" id="accauntLabel">Корзина</h5>
-            <button class="btn-close" data-dismiss="modal" aria-label="close"></button>
-          </div>
-
-          <div class="modal-body">
-            <form class="" action="" method="post">
-                Корзина пуста
-            </form>
-          </div>
-
-          <div class="modal-footer">
-            <button class="btn btn-secondary" data-dismiss="modal">Оформить заказ</button>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal -->
-
-    <main>
-      <div class="carousel slide" id="carouselControls" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="https://i.pinimg.com/originals/47/0a/19/470a19a36904fe200610cc1f41eb00d9.jpg" class="d-block w-100">
-          </div>
-
-        </div>
-
-
-
-      </div>
-    </main>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js" integrity="sha384-BOsAfwzjNJHrJ8cZidOg56tcQWfp6y72vEJ8xQ9w6Quywb24iOsW913URv1IS4GD" crossorigin="anonymous"></script>
-  </body>
-
+            function animate() {
+                requestAnimationFrame(animate)
+                controls.update();
+                renderer.render(scene, camera)
+            }
+            animate()
+        }
+        init()
+    </script>
+</body>
 </html>
